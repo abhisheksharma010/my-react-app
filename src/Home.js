@@ -1,15 +1,15 @@
-import React, { useState, useContext } from 'react';
-import UserContext from './useContext'; // Import UserContext from correct path
+import React, { useState } from 'react';
+import { UserContext } from './useContext'; // assuming UserContext is in a separate file
+
 
 const Home = ({ phones, setPhones }) => {
+
     const [newPhone, setNewPhone] = useState({
         phoneName: "",
         phoneImg: "",
         phoneYear: "",
         uuid: ""
     });
-
-    const { phoneNumber } = useContext(UserContext); // Destructure setPhoneNumber from context
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -20,36 +20,26 @@ const Home = ({ phones, setPhones }) => {
     };
 
     const addPhone = () => {
-        const userOfficialName = prompt("Please enter your official name:");
-        if (userOfficialName === phoneNumber) {
-            if (newPhone.phoneName && newPhone.phoneImg && newPhone.phoneYear) {
-                const updatedPhones = [...phones, { ...newPhone, uuid: Math.random().toString() }];
-                setPhones(updatedPhones);
-                setNewPhone({
-                    phoneName: "",
-                    phoneImg: "",
-                    phoneYear: "",
-                    uuid: ""
-                });
-            } else {
-                alert("Please fill in all fields for the new phone.");
-            }
+        if (newPhone.phoneName && newPhone.phoneImg && newPhone.phoneYear) {
+            const updatedPhones = [...phones, { ...newPhone, uuid: Math.random().toString() }];
+            setPhones(updatedPhones);
+            setNewPhone({
+                phoneName: "",
+                phoneImg: "",
+                phoneYear: "",
+                uuid: ""
+            });
         } else {
-            alert("Permission denied. Your official name does not match the owner's name.");
+            alert("Please fill in all fields for the new phone.");
         }
     };
 
     const deletePhone = (uuid) => {
-        const userOfficialName = prompt("Please enter your official name:");
-        if (userOfficialName === phoneNumber) {
-            if (phones.length > 4) {
-                const updatedPhones = phones.filter(phone => phone.uuid !== uuid);
-                setPhones(updatedPhones);
-            } else {
-                alert("There must be more than 4 phones present. You can't delete this phone.");
-            }
+        if (phones.length > 4) {
+            const updatedPhones = phones.filter(phone => phone.uuid !== uuid);
+            setPhones(updatedPhones);
         } else {
-            alert("Permission denied. Your official name does not match the owner's name.");
+            alert("There must be more than 4 phones present. You can't delete this phone.");
         }
     };
 

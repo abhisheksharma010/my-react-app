@@ -9,9 +9,11 @@ const Login = () => {
     const { setPhoneNumber } = useContext(UserContext); // Destructure setPhoneNumber from context
 
     const handleSubmit = (e) => {
+
         e.preventDefault();
         // Assuming you want to set the phone number in the context
         setPhoneNumber(phoneOwnerName);
+
         navigate("/dashboard");
     };
 

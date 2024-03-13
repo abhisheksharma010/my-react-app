@@ -1,23 +1,13 @@
 import React from 'react';
-
-import { Link, navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
-
-
-    const handleLogin = () => {
-        navigate("/login");
-    }
-
-    const handleRegister = () => {
-        navigate("/register");
-    }
 
     return (
         <div>
             <h1>Dashboard</h1>
-            <button onClick={handleLogin}>Login</button>
-            <button onClick={handleRegister}>Register</button>
+            <Link to="/login"><button>Login</button></Link>
+            <Link to="/register"><button>Register</button></Link>
         </div>
     )
 }
